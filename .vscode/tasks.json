@@ -1,0 +1,35 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558 
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build release",
+            "type": "shell",
+            "command": "g++ -std=c++11 -Wall ${workspaceFolder}/opencv_decode.cpp -o ${workspaceFolder}/opencv_decode -lpthread -lopencv_core -lopencv_imgcodecs -I${HOME}/dev/opencv/build/installation/OpenCV/include -L${HOME}/dev/opencv/build/installation/OpenCV/lib",
+            "args": [],
+            "options": {},
+            "problemMatcher": []
+        },
+        {
+            "label": "build with debug info",
+            "type": "shell",
+            "command": "g++ -std=c++11 -g -Wall ${workspaceFolder}/opencv_decode.cpp -o ${workspaceFolder}/opencv_decode -lpthread -lopencv_core -lopencv_imgcodecs -I${HOME}/dev/opencv/build/installation/OpenCV/include -L${HOME}/dev/opencv/build/installation/OpenCV/lib",
+            "args": [],
+            "options": {},
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "run ",
+            "type": "shell",
+            "command": "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/kbinias/dev/opencv/build/installation/OpenCV/lib ${workspaceFolder}/opencv_decode 18 \"/data/dataset/imagenet/val/*\"",
+            "args": [],
+            "options": {},
+            "problemMatcher": []
+        }
+    ]
+}
