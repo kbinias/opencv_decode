@@ -26,7 +26,7 @@
         {
             "label": "run ",
             "type": "shell",
-            "command": "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/kbinias/dev/opencv/build/installation/OpenCV/lib ${workspaceFolder}/opencv_decode 18 \"/data/dataset/imagenet/val/*\"",
+            "command": "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/kbinias/dev/opencv/build/installation/OpenCV/lib ${workspaceFolder}/opencv_decode 18 '/data/dataset/imagenet/val/*'",
             "args": [],
             "options": {},
             "problemMatcher": []

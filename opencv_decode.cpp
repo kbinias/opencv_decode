@@ -6,12 +6,8 @@
 #include <tuple>
 #include <vector>
 
-// g++ -std=c++11 -Wall opencv_decode.cpp -o opencv_decode.exe -lopencv_core
-// -lopencv_imgcodecs -I${HOME}/dev/opencv/build/installation/OpenCV/include
-// -L${HOME}/dev/opencv/build/installation/OpenCV/lib
-
 // Read file paths into vector
-std::vector<std::string> readFiles(const std::string &pattern) {
+std::vector<std::string> readFilesPaths(const std::string &pattern) {
   std::vector<std::string> files;
   glob_t res;
 
@@ -106,9 +102,11 @@ int main(int argc, char *argv[]) {
 
   std::thread t[numThreads];
 
-  std::vector<std::string> filesToProcess = readFiles(pattern);
+  std::vector<std::string> filesToProcess = readFilesPaths(pattern);
 
   printf("Number of files to process: %zd\n", filesToProcess.size());
+  printf("Number of threads: %d\n", numThreads);
+  printf("File pattern: %s\n", pattern.c_str());
 
   for (int i = 0; i < numThreads; ++i) {
     t[i] = std::thread(processFile, i, std::ref(filesToProcess));
