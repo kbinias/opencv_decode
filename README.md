@@ -44,7 +44,7 @@ TODO
 
 `cd opencv_decode`
 
-`g++ -std=c++11 -Wall opencv_decode.cpp -o opencv_decode -pthread -lopencv_core -lopencv_imgcodecs -I${ROOT_DIR}/build/3rdparty/opencv/build/installation/include -L${ROOT_DIR}/build/3rdparty/opencv/build/installation/lib`
+`g++ -std=c++11 -Wall opencv_decode.cpp -o build/opencv_decode -pthread -lopencv_core -lopencv_imgcodecs -I${ROOT_DIR}/build/3rdparty/opencv/build/installation/include -L${ROOT_DIR}/build/3rdparty/opencv/build/installation/lib`
 
 * Test
-`LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${ROOT_DIR}/build/3rdparty/opencv/build/installation/lib ./opencv_decode 18 '/data/dataset/imagenet/val/*'`
+`LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${ROOT_DIR}/build/3rdparty/opencv/build/installation/lib ./build/opencv_decode 18 '/data/dataset/imagenet/val/*'`
