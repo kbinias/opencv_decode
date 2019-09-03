@@ -6,15 +6,15 @@
         {
             "label": "build release",
             "type": "shell",
-            "command": "g++ -std=c++11 -Wall ${workspaceFolder}/opencv_decode.cpp -o ${workspaceFolder}/build/opencv_decode -lpthread -lopencv_core -lopencv_imgcodecs -I${HOME}/dev/opencv/build/installation/OpenCV/include -L${HOME}/dev/opencv/build/installation/OpenCV/lib",
+            "command": "g++ -std=c++11 -Wall ${workspaceFolder}/opencv_decode.cpp -o ${workspaceFolder}/build/opencv_decode -lpthread -lopencv_core -lopencv_imgcodecs -I${HOME}/dev/tests/opencv_decode/build/3rdparty/install/OpenCV/include -L${HOME}/dev/tests/opencv_decode/build/3rdparty/install/OpenCV/lib",
             "args": [],
             "options": {},
             "problemMatcher": []
         },
         {
-            "label": "build with debug info",
+            "label": "build release with debug info",
             "type": "shell",
-            "command": "g++ -std=c++11 -g -Wall ${workspaceFolder}/opencv_decode.cpp -o ${workspaceFolder}/build/opencv_decode -lpthread -lopencv_core -lopencv_imgcodecs -I${HOME}/dev/opencv/build/installation/OpenCV/include -L${HOME}/dev/opencv/build/installation/OpenCV/lib",
+            "command": "g++ -std=c++11 -g -Wall ${workspaceFolder}/opencv_decode.cpp -o ${workspaceFolder}/build/opencv_decode -lpthread -lopencv_core -lopencv_imgcodecs -I${HOME}/dev/tests/opencv_decode/build/3rdparty/install/OpenCV/include -L${HOME}/dev/tests/opencv_decode/build/3rdparty/install/OpenCV/lib",
             "args": [],
             "options": {},
             "problemMatcher": [],
@@ -26,7 +26,7 @@
         {
             "label": "run ",
             "type": "shell",
-            "command": "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/kbinias/dev/opencv/build/installation/OpenCV/lib ${workspaceFolder}/build/opencv_decode 18 '/data/dataset/imagenet/val/*'",
+            "command": "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${HOME}/dev/tests/opencv_decode/build/3rdparty/install/OpenCV/lib ${workspaceFolder}/build/opencv_decode 18 '/data/dataset/imagenet/val/*'",
             "args": [],
             "options": {},
             "problemMatcher": []

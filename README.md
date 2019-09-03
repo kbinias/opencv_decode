@@ -10,7 +10,10 @@ e.g. `export ROOT_DIR="${HOME}/dev/opencv_decode"`
 
 ### With CMake
 
-TODO
+`mkdir build`
+`cd build`
+`cmake .. -DCMAKE_BUILD_TYPE=Release`
+`make -j`
 
 ### With Make
 
@@ -22,7 +25,7 @@ TODO
 
 `mkdir $ROOT_DIR/build/3rdparty/libjpeg-turbo/build`
 
-`cmake -B${ROOT_DIR}/build/3rdparty/libjpeg-turbo/build -H${ROOT_DIR}/build/3rdparty/libjpeg-turbo -DCMAKE_INSTALL_PREFIX=${ROOT_DIR}/build/3rdparty/libjpeg-turbo/build/installation -DCMAKE_BUILD_TYPE=RELEASE -DENABLE_STATIC=TRUE -DCMAKE_INSTALL_DOCDIR=${ROOT_DIR}/build/3rdparty/libjpeg-turbo/build/installation/doc -DCMAKE_INSTALL_DEFAULT_LIBDIR=lib -DCMAKE_POSITION_INDEPENDENT_CODE=ON`
+`cmake -B${ROOT_DIR}/build/3rdparty/libjpeg-turbo/build -H${ROOT_DIR}/build/3rdparty/libjpeg-turbo -DCMAKE_INSTALL_PREFIX=${ROOT_DIR}/build/3rdparty/install/libjpeg-turbo -DCMAKE_BUILD_TYPE=Release -DENABLE_STATIC=TRUE -DCMAKE_INSTALL_DEFAULT_LIBDIR=lib -DCMAKE_POSITION_INDEPENDENT_CODE=ON`
 
 `make -j -C ${ROOT_DIR}/build/3rdparty/libjpeg-turbo/build`
 
@@ -34,9 +37,9 @@ TODO
 
 `mkdir $ROOT_DIR/build/3rdparty/opencv/build`
 
-`cmake -DCMAKE_BUILD_TYPE=RELEASE -B${ROOT_DIR}/build/3rdparty/opencv/build -H${ROOT_DIR}/build/3rdparty/opencv -DCMAKE_INSTALL_PREFIX=${ROOT_DIR}/build/3rdparty/opencv/build/installation -DINSTALL_C_EXAMPLES=OFF -DINSTALL_PYTHON_EXAMPLES=OFF -DWITH_TBB=ON -DWITH_V4L=ON -DOPENCV_PYTHON3_INSTALL_PATH=$cwd/OpenCV-$cvVersion-py3/lib/python3.5/site-packages -DWITH_QT=OFF -DWITH_OPENGL=OFF -DBUILD_EXAMPLES=OFF -DWITH_CUDA=OFF -DOPENCV_FORCE_3RDPARTY_BUILD=OFF -DWITH_IPP=ON -DENABLE_AVX2=ON -DWITH_JPEG=ON -DBUILD_JPEG=OFF -DJPEG_INCLUDE_DIR=${ROOT_DIR}/build/3rdparty/libjpeg-turbo/build/installation/include/ -DJPEG_LIBRARY=${ROOT_DIR}/build/3rdparty/libjpeg-turbo/build/installation/lib/libjpeg.a`
+`cmake -DCMAKE_BUILD_TYPE=Release -B${ROOT_DIR}/build/3rdparty/opencv/build -H${ROOT_DIR}/build/3rdparty/opencv -DCMAKE_INSTALL_PREFIX=${ROOT_DIR}/build/3rdparty/install/opencv -DINSTALL_C_EXAMPLES=OFF -DINSTALL_PYTHON_EXAMPLES=OFF -DWITH_TBB=ON -DWITH_V4L=ON -DOPENCV_PYTHON3_INSTALL_PATH=$cwd/OpenCV-$cvVersion-py3/lib/python3.5/site-packages -DWITH_QT=OFF -DWITH_OPENGL=OFF -DBUILD_EXAMPLES=OFF -DWITH_CUDA=OFF -DOPENCV_FORCE_3RDPARTY_BUILD=OFF -DWITH_IPP=ON -DENABLE_AVX2=ON -DWITH_JPEG=ON -DBUILD_JPEG=OFF -DJPEG_INCLUDE_DIR=${ROOT_DIR}/build/3rdparty/install/libjpeg-turbo/include/ -DJPEG_LIBRARY=${ROOT_DIR}/build/3rdparty/install/libjpeg-turbo/lib/libjpeg.a`
 
-`make -j10 -C ${ROOT_DIR}/build/3rdparty/opencv/build`
+`make -j -C ${ROOT_DIR}/build/3rdparty/opencv/build`
 
 `make install -C ${ROOT_DIR}/build/3rdparty/opencv/build`
 
@@ -44,7 +47,7 @@ TODO
 
 `cd opencv_decode`
 
-`g++ -std=c++11 -Wall opencv_decode.cpp -o build/opencv_decode -pthread -lopencv_core -lopencv_imgcodecs -I${ROOT_DIR}/build/3rdparty/opencv/build/installation/include -L${ROOT_DIR}/build/3rdparty/opencv/build/installation/lib`
+`g++ -std=c++11 -Wall opencv_decode.cpp -o build/opencv_decode -pthread -lopencv_core -lopencv_imgcodecs -I${ROOT_DIR}/build/3rdparty/install/opencv/include -L${ROOT_DIR}/build/3rdparty/install/opencv/lib`
 
-* Test
-`LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${ROOT_DIR}/build/3rdparty/opencv/build/installation/lib ./build/opencv_decode 18 '/data/dataset/imagenet/val/*'`
+### Test application
+`LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${ROOT_DIR}/build/3rdparty/install/opencv/lib ./build/opencv_decode 18 '/data/dataset/imagenet/val/*'`

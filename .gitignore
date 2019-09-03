@@ -88,3 +88,5 @@ patches-*/
 # Tags
 tags
 compile_commands.json
+
+build*
