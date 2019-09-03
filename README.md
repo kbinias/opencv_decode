@@ -11,8 +11,11 @@ e.g. `export ROOT_DIR="${HOME}/dev/opencv_decode"`
 ### With CMake
 
 `mkdir build`
+
 `cd build`
+
 `cmake .. -DCMAKE_BUILD_TYPE=Release`
+
 `make -j`
 
 ### With Make
