@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.1)
 
 project(opencv_decode C CXX)
 
@@ -23,14 +23,14 @@ set(THIRD_PARTY_PATH "${CMAKE_BINARY_DIR}/3rdparty" CACHE STRING
   "A path setting third party libraries download & build directories.")
 
 SET(LIBJPEGTURBO_PROJECT        "libjpeg-turbo")
-SET(LIBJPEGTURBO_SOURCES_DIR    ${THIRD_PARTY_PATH}/libjpeg-turbo)
-SET(LIBJPEGTURBO_INSTALL_DIR    ${THIRD_PARTY_PATH}/install/libjpeg-turbo)
+SET(LIBJPEGTURBO_SOURCES_DIR    ${THIRD_PARTY_PATH}/${LIBJPEGTURBO_PROJECT})
+SET(LIBJPEGTURBO_INSTALL_DIR    ${THIRD_PARTY_PATH}/install/${LIBJPEGTURBO_PROJECT})
 SET(LIBJPEGTURBO_INC_DIR        "${LIBJPEGTURBO_INSTALL_DIR}/include" CACHE PATH "libjpeg-turbo include directory." FORCE)
 SET(LIBJPEGTURBO_LIB_DIR        "${LIBJPEGTURBO_INSTALL_DIR}/lib" CACHE PATH "libjpeg-turbo library directory." FORCE)
 
 SET(OPENCV_PROJECT        "opencv")
-SET(OPENCV_SOURCES_DIR    ${THIRD_PARTY_PATH}/OpenCV)
-SET(OPENCV_INSTALL_DIR    ${THIRD_PARTY_PATH}/install/OpenCV)
+SET(OPENCV_SOURCES_DIR    ${THIRD_PARTY_PATH}/${OPENCV_PROJECT})
+SET(OPENCV_INSTALL_DIR    ${THIRD_PARTY_PATH}/install/${OPENCV_PROJECT})
 SET(OPENCV_INC_DIR        "${OPENCV_INSTALL_DIR}/include" CACHE PATH "OpenCV include directory." FORCE)
 SET(OPENCV_LIB_DIR        "${OPENCV_INSTALL_DIR}/lib" CACHE PATH "OpenCV library directory." FORCE)
 
@@ -47,6 +47,12 @@ ExternalProject_Add(
   CMAKE_ARGS          -DCMAKE_INSTALL_DEFAULT_LIBDIR=lib
 )
 
+if(WIN32)
+  SET(JPEG_OUTPUTNAME jpeg-static${CMAKE_STATIC_LIBRARY_SUFFIX})
+else()
+  SET(JPEG_OUTPUTNAME ${CMAKE_STATIC_LIBRARY_PREFIX}jpeg${CMAKE_STATIC_LIBRARY_SUFFIX})
+endif()
+
 ExternalProject_Add(
   ${OPENCV_PROJECT}
   GIT_REPOSITORY      "https://github.com/opencv/opencv.git"
@@ -58,7 +64,6 @@ ExternalProject_Add(
   CMAKE_ARGS          -DINSTALL_PYTHON_EXAMPLES=OFF
   CMAKE_ARGS          -DWITH_TBB=ON
   CMAKE_ARGS          -DWITH_V4L=ON
-  CMAKE_ARGS          -DOPENCV_PYTHON3_INSTALL_PATH=$cwd/OpenCV-$cvVersion-py3/lib/python3.5/site-packages
   CMAKE_ARGS          -DWITH_QT=OFF
   CMAKE_ARGS          -DWITH_OPENGL=OFF
   CMAKE_ARGS          -DBUILD_EXAMPLES=OFF
@@ -69,7 +74,7 @@ ExternalProject_Add(
   CMAKE_ARGS          -DWITH_JPEG=ON
   CMAKE_ARGS          -DBUILD_JPEG=OFF
   CMAKE_ARGS          -DJPEG_INCLUDE_DIR=${LIBJPEGTURBO_INC_DIR}
-  CMAKE_ARGS          -DJPEG_LIBRARY=${LIBJPEGTURBO_LIB_DIR}/libjpeg.a
+  CMAKE_ARGS          -DJPEG_LIBRARY=${LIBJPEGTURBO_LIB_DIR}/${JPEG_OUTPUTNAME}
 )
 
 include_directories(${OPENCV_INC_DIR})
