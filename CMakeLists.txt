@@ -80,9 +80,9 @@ ExternalProject_Add(
 include_directories(${OPENCV_INC_DIR})
 link_directories(${OPENCV_LIB_DIR})
 
-add_executable(opencv_decode opencv_decode.cpp)
+add_executable(${CMAKE_PROJECT_NAME} opencv_decode.cpp)
 
-add_dependencies(opencv_decode ${LIBJPEGTURBO_PROJECT})
-add_dependencies(opencv_decode ${OPENCV_PROJECT})
+add_dependencies(${CMAKE_PROJECT_NAME} ${LIBJPEGTURBO_PROJECT})
+add_dependencies(${CMAKE_PROJECT_NAME} ${OPENCV_PROJECT})
 
-target_link_libraries(opencv_decode pthread opencv_core opencv_imgcodecs)
+target_link_libraries(${CMAKE_PROJECT_NAME} pthread opencv_core opencv_imgcodecs)
