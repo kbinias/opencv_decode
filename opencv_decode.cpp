@@ -5,6 +5,7 @@
 #include <thread>
 #include <tuple>
 #include <vector>
+#include <bits/stdc++.h>
 
 // Read file paths into vector
 std::vector<std::string> readFilesPaths(const std::string &pattern) {
