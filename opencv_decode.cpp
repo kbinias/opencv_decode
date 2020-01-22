@@ -1,7 +1,9 @@
 #include <glob.h>
 #include <iostream>
-#include <opencv2/imgcodecs.hpp>
 #include <opencv2/opencv.hpp>
+#ifdef OPENCV_LEGACY_MODE
+#include <opencv2/imgcodecs/legacy/constants_c.h>
+#endif
 #include <thread>
 #include <tuple>
 #include <vector>
@@ -73,8 +75,7 @@ void processFile(int tid, std::vector<std::string> &filesToProcess) {
 
     // Decode image data
     cv::Mat img;
-    img = cv::imdecode(cv::Mat(1, bufferLength, CV_8UC1, buffer),
-                       CV_LOAD_IMAGE_UNCHANGED);
+    img = cv::imdecode(cv::Mat(1, bufferLength, CV_8UC1, buffer), CV_LOAD_IMAGE_UNCHANGED);
 
     if (i % 1000 == 0) {
       auto end = std::chrono::steady_clock::now();
