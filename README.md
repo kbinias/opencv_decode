@@ -14,7 +14,9 @@ e.g. `export ROOT_DIR="${HOME}/dev/opencv_decode"`
 
 `cd build`
 
-`cmake .. -DCMAKE_BUILD_TYPE=Release`
+`cmake .. -DCMAKE_BUILD_TYPE=Release -DWITH_JPEGTURBO=ON -DOPENCV_VER=4.2.0`
+or `cmake .. -DCMAKE_BUILD_TYPE=Release -DWITH_JPEGTURBO=ON -DOPENCV_VER=2.4.13.7`
+or `cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWITH_JPEGTURBO=ON -DOPENCV_VER=4.2.0 -DEP_CV_SOURCE_DIR=/home/username/3rdparty/opencv/`
 
 `make -j`
 
@@ -40,7 +42,7 @@ e.g. `export ROOT_DIR="${HOME}/dev/opencv_decode"`
 
 `mkdir $ROOT_DIR/build/3rdparty/opencv/build`
 
-`cmake -DCMAKE_BUILD_TYPE=Release -B${ROOT_DIR}/build/3rdparty/opencv/build -H${ROOT_DIR}/build/3rdparty/opencv -DCMAKE_INSTALL_PREFIX=${ROOT_DIR}/build/3rdparty/install/opencv -DINSTALL_C_EXAMPLES=OFF -DINSTALL_PYTHON_EXAMPLES=OFF -DWITH_TBB=ON -DWITH_V4L=ON -DOPENCV_PYTHON3_INSTALL_PATH=$cwd/OpenCV-$cvVersion-py3/lib/python3.5/site-packages -DWITH_QT=OFF -DWITH_OPENGL=OFF -DBUILD_EXAMPLES=OFF -DWITH_CUDA=OFF -DOPENCV_FORCE_3RDPARTY_BUILD=OFF -DWITH_IPP=ON -DENABLE_AVX2=ON -DWITH_JPEG=ON -DBUILD_JPEG=OFF -DJPEG_INCLUDE_DIR=${ROOT_DIR}/build/3rdparty/install/libjpeg-turbo/include/ -DJPEG_LIBRARY=${ROOT_DIR}/build/3rdparty/install/libjpeg-turbo/lib/libjpeg.a`
+`cmake -DCMAKE_BUILD_TYPE=Release -B${ROOT_DIR}/build/3rdparty/opencv/build -H${ROOT_DIR}/build/3rdparty/opencv -DCMAKE_INSTALL_PREFIX=${ROOT_DIR}/build/3rdparty/install/opencv -DINSTALL_C_EXAMPLES=OFF -DINSTALL_PYTHON_EXAMPLES=OFF -DWITH_TBB=OFF -DWITH_V4L=OFF -DOPENCV_PYTHON3_INSTALL_PATH=$cwd/OpenCV-$cvVersion-py3/lib/python3.5/site-packages -DWITH_QT=OFF -DWITH_OPENGL=OFF -DBUILD_EXAMPLES=OFF -DWITH_CUDA=OFF -DOPENCV_FORCE_3RDPARTY_BUILD=OFF -DWITH_IPP=OFF -DENABLE_AVX2=ON -DWITH_JPEG=ON -DBUILD_JPEG=OFF -DJPEG_INCLUDE_DIR=${ROOT_DIR}/build/3rdparty/install/libjpeg-turbo/include/ -DJPEG_LIBRARY=${ROOT_DIR}/build/3rdparty/install/libjpeg-turbo/lib/libjpeg.a`
 
 `make -j -C ${ROOT_DIR}/build/3rdparty/opencv/build`
 
